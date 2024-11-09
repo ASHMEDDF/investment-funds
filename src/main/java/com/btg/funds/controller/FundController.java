@@ -28,6 +28,12 @@ public class FundController {
         return ResponseEntity.ok(newFund);
     }
 
+    @PostMapping("/nuevo")
+    public ResponseEntity<String> createNewFund(@RequestBody Fund fund) {
+        String newFund = fundService.createFund(fund);
+        return ResponseEntity.ok(newFund);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Fund> getFundById(@PathVariable Integer id) {
         Optional<Fund> Fund = fundService.getFundById(id);

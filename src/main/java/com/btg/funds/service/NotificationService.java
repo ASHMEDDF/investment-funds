@@ -6,15 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class NotificationService {
 
     JavaMailSender javaMailSender;
-
-    @Value("${spring.mail.username}")
-    private String sender;
 
     public NotificationService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -29,15 +25,12 @@ public class NotificationService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(email);
             helper.setText(messageEmail);
-            helper.setFrom(sender);
+            helper.setFrom(email);
             javaMailSender.send(message);
 
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-
-        // Lógica para enviar notificación por email o SMS
-        System.out.println("Notificación: " + message);
     }
 }
