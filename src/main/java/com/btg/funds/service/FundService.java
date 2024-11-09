@@ -17,6 +17,7 @@ public class FundService {
 
     private static final double INITIAL_BALANCE = 500_000;
 
+
     @Autowired
     private FundRepository fundRepository;
 
@@ -27,6 +28,9 @@ public class FundService {
     private NotificationService notificationService;
 
     private double userBalance = INITIAL_BALANCE;
+
+    private final String emailToCatch = "ashmeddiazg@gmail.com";
+
 
     public Optional<Fund> getFundById(Integer id) {
         return fundRepository.findById(id);
@@ -42,13 +46,14 @@ public class FundService {
 
     public String subscribeFund(Fund fund) {
         if (userBalance < fund.getMinAmount()) {
+            notificationService.sendNotification(emailToCatch,"No tiene saldo disponible para vincularse al fondo " + fund.getName());
             return "No tiene saldo disponible para vincularse al fondo " + fund.getName();
         }
 
         userBalance -= fund.getMinAmount();
         Transaction transaction = createTransaction(fund, "APERTURA");
         transactionRepository.save(transaction);
-        notificationService.sendNotification("Suscripción exitosa al fondo: " + fund.getName());
+        notificationService.sendNotification(emailToCatch,"Suscripción realizada exitosamente al fondo " + fund.getName());
         return "Suscripción realizada exitosamente al fondo " + fund.getName();
     }
 
@@ -62,7 +67,7 @@ public class FundService {
         userBalance += fund.getMinAmount();
         Transaction transaction = createTransaction(fund, "CANCELACION");
         transactionRepository.save(transaction);
-        notificationService.sendNotification("Cancelación exitosa del fondo: " + fund.getName());
+        notificationService.sendNotification(emailToCatch, "Cancelación exitosa del fondo: " + fund.getName());
         return "Se ha cancelado la suscripción al fondo " + fund.getName();
     }
 
