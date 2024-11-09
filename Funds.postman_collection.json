@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "6ed31599-71df-493d-bed1-7b5d9e7c46a3",
+		"name": "Funds",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "13011102"
+	},
+	"item": [
+		{
+			"name": "suscribir",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fundId\": 1,\r\n    \"name\": \"FPV_BTG_PACTUAL_RECAUDADORA\",\r\n    \"minAmount\": 70000,\r\n    \"category\": \"FPV\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/fondos/suscribir"
+			},
+			"response": []
+		},
+		{
+			"name": "newFund",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fundId\": 1,\r\n    \"name\": \"FPV_BTG_PACTUAL_RECAUDADORA\",\r\n    \"minAmount\": 75000,\r\n    \"category\": \"FPV\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/fondos/nuevo"
+			},
+			"response": []
+		},
+		{
+			"name": "cancel suscribe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/api/fondos/cancelar/1"
+			},
+			"response": []
+		},
+		{
+			"name": "history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/fondos/historial"
+			},
+			"response": []
+		}
+	]
+}
