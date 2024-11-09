@@ -9,6 +9,7 @@ import com.btg.funds.repository.FundRepository;
 import com.btg.funds.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class FundService {
 
     private static final double INITIAL_BALANCE = 500_000;
